@@ -1,0 +1,55 @@
+
+#fundalExerciții {
+    background-color: beige;/*#FFFFD0;*/
+    color: darkslategray;
+    border: 1px solid #E6E6DD;
+    border-radius: 7px;
+    padding: 20px;
+    font-size: 40px;
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+}
+
+#exerciții { }
+
+#fundalExerciții, #total { width: 700px; }
+
+#total { background-color: tan; margin-top: 1px; }
+
+#record { background-color: forestgreen; }
+
+#adaos { visibility: hidden; }
+
+.scor { background-color: orange; margin-bottom: 1px; }
+
+.interval { background-color: tan; }
+
+.timp { background-color: steelblue; }
+
+.intermitent { background-color: red; }
+
+.corect { color: limegreen; }
+
+.greșit { color: red; }
+
+.crește, #adaos { background-color: limegreen; outline: 1px solid yellowgreen; }
+
+.scade { background-color: red; }
+
+#scor, #interval, #timp, #total, #record, #adaos { display: block; float: left; height: 10px; clear: both; }
+
+#interval, #adaos { float: right; }
+
+.termen { display: inline-block; vertical-align: top; text-align: left; }
+
+.introdus { text-align: left; color: teal; }
+
+#răspuns { text-align: center; color: orange; }
+
+#imagineExercițiu {
+    background-color: whitesmoke;
+    border: 1px solid #E6E6DD;
+    border-radius: 3px;
+    height: 350px;
+}
