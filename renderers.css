@@ -1,0 +1,27 @@
+* {
+    -webkit-user-select: none;  /* Chrome all / Safari all   */
+    -moz-user-select: none;     /* Firefox all               */
+    -ms-user-select: none;      /* IE 10+                    */
+    -o-user-select: none;       /* No support for these yet, */
+    user-select: none;          /* use at own risk           */
+}
+.indicabil { cursor: pointer; }
+
+/* SVG Renderer */
+.SVGneIndicat { fill-opacity: 0.0; fill: red; stroke-width: 0; }
+.SVGgol { fill-opacity: 0.0; fill: blue; stroke-width: 0; }
+.SVGsimbol { fill: darkslategray; }
+.SVGselectabil { fill: midnightblue; }
+.SVGtastabil { fill: maroon; }
+
+.SVGtastă { fill: #ce91c9; }
+.SVGtastăIndicată { fill: #f4adf5; }
+.SVGtastăApăsată { fill: #bf8cc4; }
+.SVGtastăInactivă { fill: rgba(78, 36, 88, 0.45) }
+.SVGindicat { fill: rgba(186, 245, 248, 0.47); }
+.SVGapăsat { fill: #a8e23d; }
+.SVGselectat { fill: greenyellow; }
+.SVGselectatIndicat { fill: rgba(104, 255, 149, 0.53); }
+.SVGindicat, .SVGselectat, .SVGselectatIndicat, .SVGapăsat, .SVGtastă { fill-opacity: 0.8; }
+.SVGindicat, .SVGselectatIndicat, .SVGapăsat { stroke: #ADD8E6; stroke-width: 1.2; stroke-opacity: 0.8; }
+
