@@ -1,8 +1,42 @@
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>Exercitii</title>
+    <title>Joc</title>
+    <link rel="stylesheet" href="renderers.css" />
+    <link rel="stylesheet" href="exerciții.css" />
+    <script src="renderers.js"></script>
+    <script src="joc.js"></script>
+    <script src="expresii.js"></script>
+    <script src="exerciții.js"></script>
 </head>
 <body>
-  Helloe worldie!
+    <div id="fundalExerciții">
+        <div id="exercițiu"></div>
+        <script type="text/javascript">
+            Renderer = new SVGRenderer('exercițiu');
+            exercițiu = new Exercițiu();
+            var tastatură = new TastaturăFizică(),
+                expresie = new Egalitate([new ÎnmulțireX([new Număr(72), new Fracție(new Cifră(2), new Cifră(3))]), new Adunare([new Număr(104), new Fracție(new Adunare([new Număr(85), new Număr(-13)]), new Număr(18))])]),
+                tot = new Alăturare([expresie, tastatură], 30);
+            expresie.activeazăTaste(['Simbol', 'Semn', 'Cifră', 'Număr', 'Adunare', 'Fracție', 'ÎnmulțireX', 'Egalitate']);
+            //expresie.activeazăTot();
+            expresie.ajusteazăZone();
+            Renderer.reprezintă(tot);
+        </script>
+        <div id="scor" class="scor">
+            <div id="interval" class="interval">
+                <div id="timp" class="timp"></div>
+            </div>
+        </div>
+        <div id="total">
+            <div id="record">
+                <div id="adaos"></div>
+            </div>
+        </div><br />
+        <div id="imagineExercițiu">imagine</div>
+    </div>
+    <script type="text/javascript">
+        var Renderer2 = new SVGRenderer('imagineExercițiu');
+    </script>
 </body>
 </html>
