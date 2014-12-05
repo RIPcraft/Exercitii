@@ -18,8 +18,8 @@
             var tastatură = new TastaturăFizică(),
                 expresie = new Egalitate([new ÎnmulțireX([new Număr(72), new Fracție(new Cifră(2), new Cifră(3))]), new Adunare([new Număr(104), new Fracție(new Adunare([new Număr(85), new Număr(-13)]), new Număr(18))])]),
                 tot = new Alăturare([expresie, tastatură], 30);
-            expresie.activeazăTaste(['Simbol', 'Semn', 'Cifră', 'Număr', 'Adunare', 'Fracție', 'ÎnmulțireX', 'Egal', 'Egalitate']);
-            //expresie.activeazăTot();
+            //expresie.activeazăTaste(['Simbol', 'Semn', 'Cifră', 'Număr', 'Adunare', 'Fracție', 'ÎnmulțireX', 'Egal', 'Egalitate']);
+            expresie.activeazăTot();
             expresie.ajusteazăZone();
             Renderer.reprezintă(tot);
         </script>
