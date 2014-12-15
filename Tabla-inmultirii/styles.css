@@ -17,6 +17,10 @@ body { background-color: #F5F5F5; }
 
 #total { background-color: tan; margin-top: 1px; }
 
+.nivel { text-align: center; color: steelblue; cursor: pointer; }
+
+.nivel:hover { color: royalblue; }
+
 #record { background-color: forestgreen; }
 
 #adaos { visibility: hidden; }
@@ -39,6 +43,8 @@ body { background-color: #F5F5F5; }
 
 #scor, #interval, #timp, #total, #record, #adaos { display: block; float: left; height: 10px; clear: both; }
 
+#explicație { position: absolute; line-height: 10px; font-size: 11px; color: tan; }
+
 #interval, #adaos { float: right; }
 
 .termen { display: inline-block; vertical-align: top; text-align: left; }
@@ -47,11 +53,4 @@ body { background-color: #F5F5F5; }
 
 #răspuns { text-align: center; color: orange; }
 
-.putere { font-size: 0.5em; }
-
-#imagineExercițiu {
-    background-color: thistle;
-    border: 1px solid cadetblue;
-    border-radius: 3px;
-    height: 350px;
-}
+#imagineExercițiu { background-color: thistle; border: 1px solid cadetblue; border-radius: 3px; height: 350px; }
