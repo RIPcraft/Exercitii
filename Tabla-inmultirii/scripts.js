@@ -235,24 +235,25 @@ TablaÎnmulțirii.prototype.generează = function () {
     }));
 };
 TablaÎnmulțirii.prototype.creșteNivel = function () {
-    var i, j, k, medie = Exercițiu.prototype.creșteNivel.call(this);
+    Exercițiu.prototype.creșteNivel.call(this);
+    var i, j, k;
     switch (this.nivel) {
         case 1:
-            this.ponderi = [[1,1,1,1,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,1], [1, 1], [1, 0], [1, 0], [0, 0, 1]]; // doar înmulțiri neinversate și rezultat necunoscut
-            //for (k = 0, i = 5; i > 0; k += (5 + i--)) for (j = 0; j < i; this.ponderi[0][k + j++] = medie[0]); // înmulțiriea cu 5
+            this.ponderi = [[], [1, 1], [1, 0], [1, 0], [0, 0, 1]]; // doar înmulțiri neinversate și rezultat necunoscut
+            for (k = 0, i = 5; i > 0; k += (5 + i--)) for (j = 0; j < i; this.ponderi[0][k + j++] = 1); // înmulțiriea cu 5
             this.sumă = [15, 2, 1, 1, 1];
             return true;
         case 2:
-            for (i = 9, j = 6; i > 4; j += i--) this.ponderi[0][j] = medie[0]; // înmulțiriea cu 6
-            for (i = 9, j = 7; i > 3; j += i--) this.ponderi[0][j] = medie[0]; // înmulțiriea cu 7
-            this.sumă[0] += 13 * medie[0];
+            for (i = 9, j = 5; i > 4; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 6
+            for (i = 9, j = 6; i > 3; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 7
+            this.sumă[0] += 13;
             this.ponderi[3] = [3, 1]; this.sumă[3] = 4; // inversarea egalităților cu frecvență mică
             return true;
         case 3:
-            for (i = 9, j =  8; i > 2; j += i--) this.ponderi[0][j] = medie[0]; // înmulțiriea cu 8
-            for (i = 9, j =  9; i > 1; j += i--) this.ponderi[0][j] = medie[0]; // înmulțiriea cu 9
-            for (i = 9, j = 10; i > 0; j += i--) this.ponderi[0][j] = medie[0]; // înmulțiriea cu 10
-            this.sumă[0] += 27 * medie[0];
+            for (i = 9, j = 7; i > 2; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 8
+            for (i = 9, j = 8; i > 1; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 9
+            for (i = 9, j = 9; i > 0; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 10
+            this.sumă[0] += 27;
             this.ponderi[4] = [1, 1, 8]; this.sumă[4] = 10; // termeni necunoscuți cu frecvență mică
             this.ponderi[3] = [1, 1]; this.sumă[3] = 2; // inversarea egalităților cu frecvență egală
             return true;
