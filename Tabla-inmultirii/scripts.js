@@ -6,21 +6,18 @@ function Exercițiu(termeni) {
     this.nivel = 0;
     this.nivele = 1;
     this.generat = undefined;
-    this.factor = 1;
+    this.factor = 2;
     // termeni
     this.termeni = termeni;
     for (var i in termeni) termeni[i].className = 'termen';
     this.exercițiu = document.getElementById("exercițiu");
-    this.exercițiu.innerHTML = '';
-    for (var i in termeni) exercițiu.appendChild(termeni[i]);
+    this.inițializează();
     this.introdus = document.createElement('span');
     this.introdus.className = this.introdus.id = 'introdus';
     this.răspuns = document.createElement('div');
     this.răspuns.id = 'răspuns';
     this.confirmat = false;
     // scor
-    this._record = 0;
-    this._scor = 0;
     this._timp;
     this._interval;
     this.cronometru = 0;
@@ -30,6 +27,13 @@ function Exercițiu(termeni) {
     this.record = document.getElementById('record');
     this.adaos = document.getElementById('adaos');
 	this.record.style.width = this._record + 'px';
+	(this.explicație = document.getElementById("explicație")).innerHTML = 'nivelul 1';
+}
+Exercițiu.prototype.inițializează = function () {
+    this._record = 0;
+    this._scor = 30;
+    this.exercițiu.innerHTML = '';
+    for (var i in this.termeni) exercițiu.appendChild(this.termeni[i]);
 }
 Exercițiu.prototype.generează = function () {
     // adaugă interval de timp
@@ -71,7 +75,7 @@ Exercițiu.prototype.răspunsCorect = function () {
     // modifică ponderi
     var micșorare = (this._interval - this._timp) * (this._interval - this._timp) * (Exercițiu.lățimeScor - this._scor) /
                     (this._interval * this._interval * Exercițiu.lățimeScor);
-    this.modificăPonderi(1 / (1 + micșorare * (this.factor - 1) / 2));
+    this.modificăPonderi(1 / (1 + micșorare * (this.factor - 1)));
     // crește scor
     if (this._scor + this._timp >= Exercițiu.lățimeScor) this._timp = Exercițiu.lățimeScor - this._scor;
     this.scor.style.width = (this._scor += this._timp) + 'px';
@@ -124,24 +128,32 @@ Exercițiu.prototype.răspunsGreșit = function () {
 	}, 1200);
 };
 Exercițiu.prototype.modificăPonderi = function (factor) {
-    var i, j;
+    /*/var i, j;
     for (i in this.generat) {
         this.sumă[i] -= this.ponderi[i][j = this.generat[i]];
         this.ponderi[i][j] *= factor;
         this.sumă[i] += this.ponderi[i][j];
-    }
+    }/**/
 }
 Exercițiu.prototype.creșteNivel = function () {
     var i, j, k, max = [];
     if (!this.nivel++) { this.factor = 2; return 1; }
-    if (this.nivel > this.nivele) { this.exercițiu.innerHTML = '<br />Acesta a fost ultimul nivel!'; return false; }
+    if (this.nivel > this.nivele) { this.exercițiu.innerHTML += 'Acesta a fost ultimul nivel...'; return false; }
     for (i in this.ponderi) {
         max[i] = this.ponderi[i][0];
         for (j in this.ponderi[i]) if ((k = this.ponderi[i][j]) > max[i]) max[i] = k;
     }
     return max;
 }
-Exercițiu.prototype.terminăNivel = function () { this.exercițiu.innerHTML = 'Felicitări! ai terminat nivelul.'; this.creșteNivel(); }
+Exercițiu.prototype.terminăNivel = function () {
+    this.exercițiu.innerHTML = 'Felicitări! ai terminat nivelul!<br />';
+    this.creșteNivel();
+    var span = document.createElement('span'), _this = this;
+    this.exercițiu.appendChild(span);
+    span.className = "nivel";
+    span.innerHTML = 'Nivelul ' + this.nivel;
+    span.onclick = function () { _this.inițializează(); _this.explicație.innerHTML = 'nivelul ' + _this.nivel; _this.generează(); };
+}
 Exercițiu.prototype.exercițiuCompletare = function (tastă) {
     this.introdus.innerHTML = this.introdus.innerHTML.slice(0, -1) + tastă;
     if (tastă != this.răspuns.innerHTML[this.introdus.innerHTML.length - 1]) return this.răspunsGreșit();
@@ -198,8 +210,6 @@ function TablaÎnmulțirii() {
         document.createElement('span'),
         document.createElement('div')]);
     this.nivele = 5;
-    this.creșteNivel();
-    this.creșteNivel();
     this.creșteNivel();
     this.generează();
 }
