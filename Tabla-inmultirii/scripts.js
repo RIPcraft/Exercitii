@@ -31,7 +31,7 @@ function Exercițiu(termeni) {
 }
 Exercițiu.prototype.inițializează = function () {
     this._record = 0;
-    this._scor = 30;
+    this._scor = 0;
     this.exercițiu.innerHTML = '';
     for (var i in this.termeni) exercițiu.appendChild(this.termeni[i]);
 }
