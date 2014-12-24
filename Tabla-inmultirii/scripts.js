@@ -244,15 +244,15 @@ TablaÎnmulțirii.prototype.creșteNivel = function () {
             this.sumă = [15, 2, 1, 1, 1];
             return true;
         case 2:
-            for (i = 9, j = 5; i > 4; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 6
-            for (i = 9, j = 6; i > 3; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 7
+            for (i = 9, j = 5; i > 3; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 6
+            for (i = 9, j = 6; i > 2; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 7
             this.sumă[0] += 13;
             this.ponderi[3] = [3, 1]; this.sumă[3] = 4; // inversarea egalităților cu frecvență mică
             return true;
         case 3:
-            for (i = 9, j = 7; i > 2; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 8
-            for (i = 9, j = 8; i > 1; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 9
-            for (i = 9, j = 9; i > 0; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 10
+            for (i = 9, j = 7; i > 1; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 8
+            for (i = 9, j = 8; i > 0; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 9
+            for (i = 9, j = 9; i > -1; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 10
             this.sumă[0] += 27;
             this.ponderi[4] = [1, 1, 8]; this.sumă[4] = 10; // termeni necunoscuți cu frecvență mică
             this.ponderi[3] = [1, 1]; this.sumă[3] = 2; // inversarea egalităților cu frecvență egală
