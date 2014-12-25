@@ -32,7 +32,6 @@ function Exercițiu(termeni) {
 	(this.explicație = document.getElementById("explicație")).innerHTML = 'nivelul 1';
 }
 Exercițiu.prototype.inițializează = function () {
-    this.record.style.width = '0px'; // se preia din cookie :)
     this._record = 0;                // se preia din cookie :)
     this._scor = 0;
     this.exercițiu.innerHTML = '';
@@ -43,7 +42,8 @@ Exercițiu.prototype.generează = function () {
     this._interval = this._timp = (this.maxScor - this.minScor) * Math.pow((Exercițiu.lățimeScor - this._scor) / Exercițiu.lățimeScor, 0.7) + this.minScor;
     this.scor.style.width = this._scor + this._interval + 'px';
     this.interval.style.width = this._interval + 'px';
-	this.timp.style.width = this._timp + 'px';
+    this.record.style.width = this._record + 'px'; // se preia din cookie :)
+    this.timp.style.width = this._timp + 'px';
     this.interval.className = 'interval';
     this.timp.className = 'timp';
     this.adaos.style.visibility = 'hidden';
