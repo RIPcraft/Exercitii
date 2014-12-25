@@ -6,7 +6,7 @@ function Exercițiu(termeni) {
     this.nivel = 0;
     this.nivele = 1;
     this.generat = undefined;
-    this.factor = 8;
+    this.factor = 2;
     // termeni
     this.termeni = termeni;
     for (var i in termeni) termeni[i].className = 'termen';
@@ -216,6 +216,7 @@ function TablaÎnmulțirii() {
     this.nivele = 5;
     this.maxScor = 30;
     this.minScor = 3;
+    this.factor = 10;
     this.creșteNivel();
     this.generează();
 }
@@ -223,11 +224,10 @@ TablaÎnmulțirii.prototype = (function () { var ț = function () { }; ț.protot
 TablaÎnmulțirii.prototype.generează = function () {
     Exercițiu.prototype.generează.call(this);
     // recuperarea valorilor
-    var a = this.generat[0] + 1, b, c, d, e = '=', s = 'x', n = this.generat[4] * 2;
+    var a = this.generat[0] + 1, b, c, d, e = '=', s = 'x', n = this.generat[3] * 2;
     for (b = 10; a > b; a -= b--); c = (a += (b = 11 - b) - 1) * b; // găsirea perechii din tabla înmulțirii
-    if (this.generat[1]) { d = a; a = b; b = d; } // inversarea perechii (sau nu)
-    if (this.generat[2]) { d = a; a = c; c = d; s = ':'; } // înmulțire sau împărțire
-    if (this.generat[3]) { d = c; c = b; b = a; a = d; d = e; e = s; s = d; n = (n + 2) % 6; } // inversarea egalității (sau nu)
+    if (this.generat[1]) { d = a; a = c; c = d; s = ':'; } // înmulțire sau împărțire
+    if (this.generat[2]) { d = c; c = b; b = a; a = d; d = e; e = s; s = d; n = (n + 2) % 6; } // inversarea egalității (sau nu)
     // afișarea valorilor
     this.termeni[0].innerHTML = a;
     this.termeni[1].innerHTML = '&nbsp;' + s + '&nbsp;';
@@ -244,7 +244,7 @@ TablaÎnmulțirii.prototype.creșteNivel = function () {
     var i, j, k, max = Exercițiu.prototype.creșteNivel.call(this);
     switch (this.nivel) {
         case 1:
-            this.ponderi = [[], [1, 1], [1, 0], [1, 0], [0, 0, 1]]; // doar înmulțiri neinversate și rezultat necunoscut
+            this.ponderi = [[], [1, 0], [1, 0], [0, 0, 1]]; // doar înmulțiri neinversate și rezultat necunoscut
             this.ture = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                           1, 1, 1, 1, 1, 1, 1, 1, 1,
                           1, 1, 1, 1, 1, 1, 1, 1,
@@ -254,27 +254,27 @@ TablaÎnmulțirii.prototype.creșteNivel = function () {
                           1, 1, 1, 1,
                           1, 1, 1,
                           1, 1,
-                          1], [1, 1], [1, 1], [1, 1], [1, 1, 1]];
+                          1], [1, 1], [1, 1], [1, 1, 1]];
             for (k = 0, i = 5; i > 0; k += (5 + i--)) for (j = 0; j < i; this.ponderi[0][k + j++] = 1); // înmulțiriea cu 5
             return true;
         case 2:
             for (i = 9, j = 5; i > 3; j += i--) this.ponderi[0][j] = max[0]; // înmulțiriea cu 6
             for (i = 9, j = 6; i > 2; j += i--) this.ponderi[0][j] = max[0]; // înmulțiriea cu 7
-            this.ponderi[3] = [3, 1]; // inversarea egalităților cu frecvență mică
+            this.ponderi[2] = [3, 1]; // inversarea egalităților cu frecvență mică
             return true;
         case 3:
             for (i = 9, j = 7; i > 1; j += i--) this.ponderi[0][j] = max[0]; // înmulțiriea cu 8
             for (i = 9, j = 8; i > 0; j += i--) this.ponderi[0][j] = max[0]; // înmulțiriea cu 9
             for (i = 9, j = 9; i > -1; j += i--) this.ponderi[0][j] = max[0]; // înmulțiriea cu 10
-            this.ponderi[4] = [1, 1, 8]; // termeni necunoscuți cu frecvență mică
-            this.ponderi[3] = [1, 1]; // inversarea egalităților cu frecvență egală
+            this.ponderi[3] = [1, 1, 8]; // termeni necunoscuți cu frecvență mică
+            this.ponderi[2] = [1, 1]; // inversarea egalităților cu frecvență egală
             return true;
         case 4:
-            this.ponderi[4] = [3, 3, 2]; // termeni necunoscuți cu frecvență mare
-            this.ponderi[2] = [3, 1]; // împărțiri cu frecvență mică
+            this.ponderi[3] = [3, 3, 2]; // termeni necunoscuți cu frecvență mare
+            this.ponderi[1] = [3, 1]; // împărțiri cu frecvență mică
             return true;
         case 5:
-            this.ponderi[2][1] *= 3; // împărțiri cu frecvență mare
+            this.ponderi[1][1] *= 10; // împărțiri cu frecvență mare
             return true;
     }
     return false;
