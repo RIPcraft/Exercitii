@@ -31,7 +31,7 @@ function Exercițiu(termeni) {
 }
 Exercițiu.prototype.inițializează = function () {
     this._record = 0;
-    this._scor = 690;
+    this._scor = 0;
     this.exercițiu.innerHTML = '';
     for (var i in this.termeni) exercițiu.appendChild(this.termeni[i]);
 }
@@ -209,9 +209,6 @@ function TablaÎnmulțirii() {
         document.createElement('span'),
         document.createElement('div')]);
     this.nivele = 5;
-    this.creșteNivel();
-    this.creșteNivel();
-    this.creșteNivel();
     this.creșteNivel();
     this.generează();
 }
