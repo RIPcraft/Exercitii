@@ -6,7 +6,7 @@ function Exercițiu(termeni) {
     this.nivel = 0;
     this.nivele = 1;
     this.generat = undefined;
-    this.factor = 2;
+    this.factor = 8;
     // termeni
     this.termeni = termeni;
     for (var i in termeni) termeni[i].className = 'termen';
@@ -18,6 +18,8 @@ function Exercițiu(termeni) {
     this.răspuns.id = 'răspuns';
     this.confirmat = false;
     // scor
+    this.minScor;
+    this.maxScor;
     this._timp;
     this._interval;
     this.cronometru = 0;
@@ -37,7 +39,7 @@ Exercițiu.prototype.inițializează = function () {
 }
 Exercițiu.prototype.generează = function () {
     // adaugă interval de timp
-    this._interval = this._timp = ((Exercițiu.lățimeScor * Exercițiu.lățimeScor - this._scor * this._scor) / 5000) + 3;
+    this._interval = this._timp = (this.maxScor - this.minScor) * Math.pow((Exercițiu.lățimeScor - this._scor) / Exercițiu.lățimeScor, 0.7) + this.minScor;
     this.scor.style.width = this._scor + this._interval + 'px';
     this.interval.style.width = this._interval + 'px';
 	this.timp.style.width = this._timp + 'px';
@@ -140,6 +142,8 @@ Exercițiu.prototype.creșteNivel = function () {
         max[i] = this.ponderi[i][0];
         for (j in this.ponderi[i]) if ((k = this.ponderi[i][j]) > max[i]) max[i] = k;
     }
+    this.maxScor *= (1 - (k = (k = (k = (this.maxScor - this.minScor) / (this.maxScor + this.minScor)) * k) * k));
+    this.minScor *= (1 + k);
     return max;
 }
 Exercițiu.prototype.terminăNivel = function () {
@@ -209,6 +213,8 @@ function TablaÎnmulțirii() {
         document.createElement('span'),
         document.createElement('div')]);
     this.nivele = 5;
+    this.maxScor = 30;
+    this.minScor = 4;
     this.creșteNivel();
     this.generează();
 }
