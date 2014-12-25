@@ -2,7 +2,7 @@
 function Exercițiu(termeni) {
     // ponderi
     this.ponderi = [];
-    this.sumă = [];
+    this.ture = [];
     this.nivel = 0;
     this.nivele = 1;
     this.generat = undefined;
@@ -31,13 +31,13 @@ function Exercițiu(termeni) {
 }
 Exercițiu.prototype.inițializează = function () {
     this._record = 0;
-    this._scor = 0;
+    this._scor = 690;
     this.exercițiu.innerHTML = '';
     for (var i in this.termeni) exercițiu.appendChild(this.termeni[i]);
 }
 Exercițiu.prototype.generează = function () {
     // adaugă interval de timp
-    this._interval = this._timp = ((Exercițiu.lățimeScor * Exercițiu.lățimeScor - this._scor * this._scor) / 20000) + 2.57;
+    this._interval = this._timp = ((Exercițiu.lățimeScor * Exercițiu.lățimeScor - this._scor * this._scor) / 5000) + 3;
     this.scor.style.width = this._scor + this._interval + 'px';
     this.interval.style.width = this._interval + 'px';
 	this.timp.style.width = this._timp + 'px';
@@ -46,11 +46,15 @@ Exercițiu.prototype.generează = function () {
     this.adaos.style.visibility = 'hidden';
     this.interval.style.visibility = 'visible';
     // generează noua valoare
-    var nou, nr;
+    var factori, sumă, i, j, k;
     this.generat = [];
-    for (var i in this.ponderi) {
-        for (nou = 0, nr = Math.random() * this.sumă[i] - this.ponderi[i][nou]; nr > 0; nr -= (this.ponderi[i][++nou] || 0));
-        this.generat[i] = nou;
+    for (i in this.ponderi) {
+        for (j = k = sumă = 0, factori = [[], []]; j < this.ponderi[i].length; j++) if (this.ponderi[i][j]) {
+            sumă += (factori[0][k] = this.ponderi[i][j] * this.ture[i][j]++);
+            factori[1][k++] = j;
+        }
+        for (j = 0, k = Math.random() * sumă; k > factori[0][j]; k -= factori[0][j++]);
+        this.ture[i][this.generat[i] = factori[1][j]] = 1;
     }
 	// pornește cronometru
     var _this = this;
@@ -72,10 +76,10 @@ Exercițiu.prototype.răspunsCorect = function () {
     document.onkeydown = undefined;
 	// evidențiază răspuns
     this.introdus.className = 'corect';
-    // modifică ponderi
-    var micșorare = (this._interval - this._timp) * (this._interval - this._timp) * (Exercițiu.lățimeScor - this._scor) /
+    // micșorează ponderi
+    var micșorare = this._timp * this._timp * (Exercițiu.lățimeScor - this._scor) /
                     (this._interval * this._interval * Exercițiu.lățimeScor);
-    this.modificăPonderi(1 / (1 + micșorare * (this.factor - 1)));
+    this.modificăPonderi(1 / (1 + 2 * micșorare * (this.factor - 1)));
     // crește scor
     if (this._scor + this._timp >= Exercițiu.lățimeScor) this._timp = Exercițiu.lățimeScor - this._scor;
     this.scor.style.width = (this._scor += this._timp) + 'px';
@@ -107,8 +111,8 @@ Exercițiu.prototype.răspunsGreșit = function () {
 	// arată răspuns corect
     this.introdus.className = 'greșit';
     this.răspuns.style.visibility = 'visible';
-    // modifică ponderi
-    var mărire = this._timp * this._timp * (Exercițiu.lățimeScor - this._scor) /
+    // crește ponderi
+    var mărire = (this._interval - this._timp) * (this._interval - this._timp) * (Exercițiu.lățimeScor - this._scor) /
                  (this._interval * this._interval * Exercițiu.lățimeScor);
     this.modificăPonderi(1 + mărire * (this.factor - 1));
 	// scade scor
@@ -127,14 +131,7 @@ Exercițiu.prototype.răspunsGreșit = function () {
 		}, 200);
 	}, 1200);
 };
-Exercițiu.prototype.modificăPonderi = function (factor) {
-    /*/var i, j;
-    for (i in this.generat) {
-        this.sumă[i] -= this.ponderi[i][j = this.generat[i]];
-        this.ponderi[i][j] *= factor;
-        this.sumă[i] += this.ponderi[i][j];
-    }/**/
-}
+Exercițiu.prototype.modificăPonderi = function (factor) { for (var i in this.generat) this.ponderi[i][this.generat[i]] *= factor; }
 Exercițiu.prototype.creșteNivel = function () {
     var i, j, k, max = [];
     if (!this.nivel++) { this.factor = 2; return 1; }
@@ -148,11 +145,13 @@ Exercițiu.prototype.creșteNivel = function () {
 Exercițiu.prototype.terminăNivel = function () {
     this.exercițiu.innerHTML = 'Felicitări! ai terminat nivelul!<br />';
     this.creșteNivel();
-    var span = document.createElement('span'), _this = this;
-    this.exercițiu.appendChild(span);
-    span.className = "nivel";
-    span.innerHTML = 'Nivelul ' + this.nivel;
-    span.onclick = function () { _this.inițializează(); _this.explicație.innerHTML = 'nivelul ' + _this.nivel; _this.generează(); };
+    if (this.nivel <= this.nivele) {
+        var span = document.createElement('span'), _this = this;
+        this.exercițiu.appendChild(span);
+        span.className = "nivel";
+        span.innerHTML = 'Nivelul ' + this.nivel;
+        span.onclick = function () { _this.inițializează(); _this.explicație.innerHTML = 'nivelul ' + _this.nivel; _this.generează(); };
+    }
 }
 Exercițiu.prototype.exercițiuCompletare = function (tastă) {
     this.introdus.innerHTML = this.introdus.innerHTML.slice(0, -1) + tastă;
@@ -211,6 +210,9 @@ function TablaÎnmulțirii() {
         document.createElement('div')]);
     this.nivele = 5;
     this.creșteNivel();
+    this.creșteNivel();
+    this.creșteNivel();
+    this.creșteNivel();
     this.generează();
 }
 TablaÎnmulțirii.prototype = (function () { var ț = function () { }; ț.prototype = Exercițiu.prototype; return new ț; })();
@@ -235,34 +237,40 @@ TablaÎnmulțirii.prototype.generează = function () {
     }));
 };
 TablaÎnmulțirii.prototype.creșteNivel = function () {
-    Exercițiu.prototype.creșteNivel.call(this);
-    var i, j, k;
+    var i, j, k, max = Exercițiu.prototype.creșteNivel.call(this);
     switch (this.nivel) {
         case 1:
             this.ponderi = [[], [1, 1], [1, 0], [1, 0], [0, 0, 1]]; // doar înmulțiri neinversate și rezultat necunoscut
+            this.ture = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1, 1,
+                          1, 1, 1, 1, 1,
+                          1, 1, 1, 1,
+                          1, 1, 1,
+                          1, 1,
+                          1], [1, 1], [1, 1], [1, 1], [1, 1, 1]];
             for (k = 0, i = 5; i > 0; k += (5 + i--)) for (j = 0; j < i; this.ponderi[0][k + j++] = 1); // înmulțiriea cu 5
-            this.sumă = [15, 2, 1, 1, 1];
             return true;
         case 2:
-            for (i = 9, j = 5; i > 3; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 6
-            for (i = 9, j = 6; i > 2; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 7
-            this.sumă[0] += 13;
-            this.ponderi[3] = [3, 1]; this.sumă[3] = 4; // inversarea egalităților cu frecvență mică
+            for (i = 9, j = 5; i > 3; j += i--) this.ponderi[0][j] = max[0]; // înmulțiriea cu 6
+            for (i = 9, j = 6; i > 2; j += i--) this.ponderi[0][j] = max[0]; // înmulțiriea cu 7
+            this.ponderi[3] = [3, 1]; // inversarea egalităților cu frecvență mică
             return true;
         case 3:
-            for (i = 9, j = 7; i > 1; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 8
-            for (i = 9, j = 8; i > 0; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 9
-            for (i = 9, j = 9; i > -1; j += i--) this.ponderi[0][j] = 1; // înmulțiriea cu 10
-            this.sumă[0] += 27;
-            this.ponderi[4] = [1, 1, 8]; this.sumă[4] = 10; // termeni necunoscuți cu frecvență mică
-            this.ponderi[3] = [1, 1]; this.sumă[3] = 2; // inversarea egalităților cu frecvență egală
+            for (i = 9, j = 7; i > 1; j += i--) this.ponderi[0][j] = max[0]; // înmulțiriea cu 8
+            for (i = 9, j = 8; i > 0; j += i--) this.ponderi[0][j] = max[0]; // înmulțiriea cu 9
+            for (i = 9, j = 9; i > -1; j += i--) this.ponderi[0][j] = max[0]; // înmulțiriea cu 10
+            this.ponderi[4] = [1, 1, 8]; // termeni necunoscuți cu frecvență mică
+            this.ponderi[3] = [1, 1]; // inversarea egalităților cu frecvență egală
             return true;
         case 4:
-            this.ponderi[4] = [3, 3, 2]; this.sumă[4] = 8; // termeni necunoscuți cu frecvență mare
-            this.ponderi[2] = [3, 1]; this.sumă[2] = 4; // împărțiri cu frecvență mică
+            this.ponderi[4] = [3, 3, 2]; // termeni necunoscuți cu frecvență mare
+            this.ponderi[2] = [3, 1]; // împărțiri cu frecvență mică
             return true;
         case 5:
-            this.ponderi[2][1] *= 3; this.sumă[2] = this.ponderi[2][0] + this.ponderi[2][1]; // împărțiri cu frecvență mare
+            this.ponderi[2][1] *= 3; // împărțiri cu frecvență mare
             return true;
     }
     return false;
