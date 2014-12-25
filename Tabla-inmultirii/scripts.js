@@ -32,7 +32,8 @@ function Exercițiu(termeni) {
 	(this.explicație = document.getElementById("explicație")).innerHTML = 'nivelul 1';
 }
 Exercițiu.prototype.inițializează = function () {
-    this._record = 0;
+    this.record.style.width = '0px'; // se preia din cookie :)
+    this._record = 0;                // se preia din cookie :)
     this._scor = 0;
     this.exercițiu.innerHTML = '';
     for (var i in this.termeni) exercițiu.appendChild(this.termeni[i]);
