@@ -142,7 +142,7 @@ Exercițiu.prototype.creșteNivel = function () {
         max[i] = this.ponderi[i][0];
         for (j in this.ponderi[i]) if ((k = this.ponderi[i][j]) > max[i]) max[i] = k;
     }
-    this.maxScor *= (1 - (k = (k = (k = (this.maxScor - this.minScor) / (this.maxScor + this.minScor)) * k) * k));
+    this.maxScor *= (1 - (k = (k = (k = (k = (this.maxScor - this.minScor) / (this.maxScor + this.minScor)) * k) * k) * k));
     this.minScor *= (1 + k);
     return max;
 }
@@ -214,7 +214,7 @@ function TablaÎnmulțirii() {
         document.createElement('div')]);
     this.nivele = 5;
     this.maxScor = 30;
-    this.minScor = 4;
+    this.minScor = 3;
     this.creșteNivel();
     this.generează();
 }
