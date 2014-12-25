@@ -274,7 +274,7 @@ TablaÎnmulțirii.prototype.creșteNivel = function () {
             this.ponderi[1] = [3, 1]; // împărțiri cu frecvență mică
             return true;
         case 5:
-            this.ponderi[1][1] *= 10; // împărțiri cu frecvență mare
+            this.ponderi[1][1] *= 10000; // împărțiri cu frecvență mare
             return true;
     }
     return false;
