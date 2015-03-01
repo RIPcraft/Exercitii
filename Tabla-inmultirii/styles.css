@@ -54,3 +54,10 @@ body { background-color: #F5F5F5; }
 #răspuns { text-align: center; color: orange; }
 
 #imagineExercițiu { background-color: thistle; border: 1px solid cadetblue; border-radius: 3px; height: 350px; }
+
+.tasta {
+    width: 1.5em; height: 1.5em; border-radius: 0.2em;
+    background: linear-gradient(170deg, #787a78 0%,#070707 100%);
+    text-align: center; font-size: 3em; color: silver;
+    cursor: pointer;
+}
