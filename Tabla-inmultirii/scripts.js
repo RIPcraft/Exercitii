@@ -217,7 +217,7 @@ function TablaÎnmulțirii() {
     this.nivele = 5;
     this.maxScor = 30;
     this.minScor = 3;
-    this.factor = 10;
+    this.factor = 100;
     this.creșteNivel();
     this.generează();
 }
