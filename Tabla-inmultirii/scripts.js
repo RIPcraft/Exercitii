@@ -203,6 +203,7 @@ Exercițiu.tastaturăNumerică = function (funcție) {
         105: [funcție, 9]
     };
 };
+Exercițiu.prototype.apasă = function (tastă) { if (document.onkeydown) this.exercițiuCompletare(tastă.innerHTML); };
 Exercițiu.lățimeScor = 700;
 
 
