@@ -57,7 +57,13 @@ body { background-color: #F5F5F5; }
 
 .tasta {
     width: 1.5em; height: 1.5em; border-radius: 0.2em;
-    background: linear-gradient(170deg, #787a78 0%,#070707 100%);
+    background: #787a78; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #787a78 0%, #070707 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#787a78), color-stop(100%,#070707)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg, #787a78 0%,#070707 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg, #787a78 0%,#070707 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg, #787a78 0%,#070707 100%); /* IE10+ */
+    background: linear-gradient(170deg, #787a78 0%,#070707 100%); /* W3C */
     text-align: center; font-size: 3em; color: silver;
     cursor: pointer;
 }
