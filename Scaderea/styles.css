@@ -1,0 +1,69 @@
+
+body { background-color: #F5F5F5; }
+
+#fundalExerciții {
+    background-color: #f8f3d5;
+    color: darkslategray;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    padding: 30px 15px 35px 15px;
+    font-size: 40px;
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+}
+
+#fundalExerciții, #total { width: 700px; }
+
+#total { background-color: tan; margin-top: 1px; }
+
+.nivel { text-align: center; color: steelblue; cursor: pointer; }
+
+.nivel:hover { color: royalblue; }
+
+#record { background-color: forestgreen; }
+
+#adaos { visibility: hidden; }
+
+.scor { background-color: orange; margin-bottom: 1px; }
+
+.interval { background-color: tan; }
+
+.timp { background-color: steelblue; }
+
+.intermitent { background-color: red; }
+
+.corect { color: limegreen; }
+
+.greșit { color: red; }
+
+.crește, #adaos { background-color: limegreen; outline: 1px solid yellowgreen; }
+
+.scade { background-color: red; }
+
+#scor, #interval, #timp, #total, #record, #adaos { display: block; float: left; height: 10px; clear: both; }
+
+#explicație { position: absolute; line-height: 10px; font-size: 11px; color: tan; }
+
+#interval, #adaos { float: right; }
+
+.termen { display: inline-block; vertical-align: top; text-align: left; }
+
+.introdus { text-align: left; color: teal; }
+
+#răspuns { text-align: center; color: orange; }
+
+#imagineExercițiu { background-color: thistle; border: 1px solid cadetblue; border-radius: 3px; height: 350px; }
+
+.tasta {
+    width: 1.5em; height: 1.5em; border-radius: 0.2em;
+    background: #787a78; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #787a78 0%, #070707 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#787a78), color-stop(100%,#070707)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg, #787a78 0%,#070707 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg, #787a78 0%,#070707 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg, #787a78 0%,#070707 100%); /* IE10+ */
+    background: linear-gradient(170deg, #787a78 0%,#070707 100%); /* W3C */
+    text-align: center; font-size: 3em; color: silver;
+    cursor: pointer;
+}
