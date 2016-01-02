@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Tabla Înmulțirii</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="scripts.js"></script>
+</head>
+<body>
+    <div id="fundalExerciții">
+        <div id="exercițiu">
+            <span class="nivel" onclick="T = new TablaÎnmulțirii();">Nivelul 1</span>
+        </div>
+        <div id="scor" class="scor">
+            <div id="interval" class="interval">
+                <div id="timp" class="timp"></div>
+            </div>
+        </div>
+        <div id="total">
+            <div id="record">
+                <span id="explicație" class="explicație"></span>
+                <div id="adaos"></div>
+            </div>
+        </div>
+    </div><br />
+    <center>
+        <table>
+            <tr><td class="tasta" onclick="T.apasă(this)">7</td><td class="tasta" onclick="T.apasă(this)">8</td><td class="tasta" onclick="T.apasă(this)">9</td></tr>
+            <tr><td class="tasta" onclick="T.apasă(this)">4</td><td class="tasta" onclick="T.apasă(this)">5</td><td class="tasta" onclick="T.apasă(this)">6</td></tr>
+            <tr><td class="tasta" onclick="T.apasă(this)">1</td><td class="tasta" onclick="T.apasă(this)">2</td><td class="tasta" onclick="T.apasă(this)">3</td></tr>
+            <tr><td class="tasta" onclick="T.apasă(this)" colspan="2">0</td></tr>
+        </table>
+    </center>
+</body>
+</html>
